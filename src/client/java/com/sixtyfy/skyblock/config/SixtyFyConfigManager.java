@@ -1,6 +1,7 @@
 package com.sixtyfy.skyblock.config;
 
 import com.google.gson.FieldNamingPolicy;
+import com.sixtyfy.skyblock.SixtyFyClient;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -23,17 +24,21 @@ public class SixtyFyConfigManager {
                     ).build()
             ).build();
 
-//    public static void init() {
-//        if (StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass() != SixtyFyClient.class) {
-//            throw new IllegalStateException("Cannot initialize config from a class other than SixtyFyClient");
-//        }
-//
-//        HANDLER.load();
-//    }
+    public static void init() {
+        if (StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass() != SixtyFyClient.class) {
+            throw new IllegalStateException("Cannot initialize config from a class other than SixtyFyClient");
+        }
+
+        HANDLER.load();
+    }
 
     public static SixtyFyConfig getConfig() {
         return HANDLER.instance();
     }
+
+//    public static void save() {
+//        HANDLER.save();
+//    }
 
     public static Screen createGui(Screen parent) {
         return YetAnotherConfigLib.create(HANDLER, ((defaults, config, builder) -> builder
