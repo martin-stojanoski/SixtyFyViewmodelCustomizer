@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "sixtyfy",
+	"version": "${version}",
+	"name": "SixtyFy Viewmodel Customization",
+	"description": "Enables view model customization.",
+	"authors": [
+		"60fy"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/sixtyfy/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.sixtyfy.skyblock.SixtyFy"
+		],
+		"client": [
+			"com.sixtyfy.skyblock.SixtyFyClient"
+		],
+		"modmenu": [
+			"com.sixtyfy.skyblock.compatibility.ModMenu"
+		]
+	},
+	"mixins": [
+		"sixtyfy.mixins.json",
+		{
+			"config": "sixtyfy.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*",
+		"yet_another_config_lib_v3": ">=3.5.0+1.21"
+	},
+	"suggests": {
+		"modmenu": ">=11.0.0"
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "com.sixtyfy.skyblock.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"CustomHeldItemRenderer"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
