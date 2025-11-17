@@ -6,11 +6,14 @@ import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
 
 public class SixtyFyConfigManager {
     private static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve("sixtyfy.json");
@@ -35,10 +38,6 @@ public class SixtyFyConfigManager {
     public static SixtyFyConfig getConfig() {
         return HANDLER.instance();
     }
-
-//    public static void save() {
-//        HANDLER.save();
-//    }
 
     public static Screen createGui(Screen parent) {
         return YetAnotherConfigLib.create(HANDLER, ((defaults, config, builder) -> builder
@@ -218,6 +217,47 @@ public class SixtyFyConfigManager {
                                                 (v) -> config.armRotateZ = v
                                         )
                                         .controller(opt -> SixtyFyConfigUtils.createFloatSliderController(opt, -180.0f, 180.0f, "°", 1.0f))
+                                        .build()
+                                )
+                                .build()
+                        )
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.literal("Presets"))
+                                .description(OptionDescription.of(Text.literal("Quickly apply predefined configurations")))
+                                .collapsed(false)
+                                .option(LabelOption.createBuilder()
+                                        .line(Text.literal("Last applied preset: " + config.getCurrentPreset()))
+                                        .build()
+                                )
+                                .option(ButtonOption.createBuilder()
+                                        .name(Text.literal("Small Preset"))
+                                        .description(OptionDescription.of(Text.literal("Apply Small viewmodel preset")))
+                                        .text(Text.literal("Apply small preset"))
+                                        .action((screen, buttonOption) -> {
+                                            config.applyPresetByName("Small");
+                                            // Refresh the screen to show updated values
+                                            MinecraftClient.getInstance().setScreen(SixtyFyConfigManager.createGui(screen));
+                                        })
+                                        .build()
+                                )
+                                .option(ButtonOption.createBuilder()
+                                        .name(Text.literal("Large Preset"))
+                                        .description(OptionDescription.of(Text.literal("Apply Big viewmodel preset")))
+                                        .text(Text.literal("Apply large preset"))
+                                        .action((screen, buttonOption) -> {
+                                            config.applyPresetByName("Large");
+                                            MinecraftClient.getInstance().setScreen(SixtyFyConfigManager.createGui(screen));
+                                        })
+                                        .build()
+                                )
+                                .option(ButtonOption.createBuilder()
+                                        .name(Text.literal("Reset to Default"))
+                                        .description(OptionDescription.of(Text.literal("Reset all values to default")))
+                                        .text(Text.literal("Reset all values to default (off, 0)"))
+                                        .action((screen, buttonOption) -> {
+                                            config.applyPresetByName("Default");
+                                            MinecraftClient.getInstance().setScreen(SixtyFyConfigManager.createGui(screen));
+                                        })
                                         .build()
                                 )
                                 .build()

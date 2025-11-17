@@ -1,11 +1,18 @@
 package com.sixtyfy.skyblock.config;
 
+import dev.isxander.yacl3.api.Controller;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
+import dev.isxander.yacl3.api.utils.Dimension;
+import dev.isxander.yacl3.gui.AbstractWidget;
+import dev.isxander.yacl3.gui.YACLScreen;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 
 import java.text.DecimalFormat;
+import java.util.function.Function;
 
 public class SixtyFyConfigUtils {
 
