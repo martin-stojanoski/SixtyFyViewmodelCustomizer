@@ -22,8 +22,8 @@ public class SixtyFyConfigManager {
                     .setPath(PATH)
                     .setJson5(false)
                     .appendGsonBuilder(builder -> builder
-                            .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
-                            .registerTypeHierarchyAdapter(Identifier.class, new Identifier.Serializer())
+                                    .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+                            // Remove the Identifier serializer - it's not needed for your config
                     ).build()
             ).build();
 
